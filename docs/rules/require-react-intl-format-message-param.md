@@ -1,27 +1,13 @@
-# require-react-intl-define-messages
+# require-react-intl-format-message-param
 
-In apps using `react-intl`, if using the "on-the-fly" approach of defining intl strings, it is recommended to wrap all messages in `defineMessages`.
+In apps using `react-intl`, we want to ensure that the `MessageDescriptor` parameter is defined when being passed
+into `formatMessage`.
 
 ## Examples
 
-We can accomplish this by converting the following:
-
 ```javascript
 import * as React from "react";
-
-const messages = {
-  foo: {
-    id: "foo",
-    defaultMessage: "foo",
-  },
-};
-```
-
-to:
-
-```javascript
-import * as React from "react";
-import { defineMessages } from "react-intl";
+import { defineMessages, useIntl } from "react-intl";
 
 const messages = defineMessages({
   foo: {
@@ -29,8 +15,13 @@ const messages = defineMessages({
     defaultMessage: "foo",
   },
 });
+
+const MyComponent = () => {
+  const { formatMessage } = useIntl();
+  return <div>{formatMessage(messages.foo)}</div>
+}
 ```
 
 ## Notes
 
-- This plugin only checks for variables named `messages`.
+- This plugin only checks for parameters passed into functions named `formatMessage`.
