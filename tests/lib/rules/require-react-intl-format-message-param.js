@@ -5,7 +5,7 @@ const eslintTester = new RuleTester({
   parserOptions: { ecmaVersion: 6, sourceType: "module" },
 });
 
-eslintTester.run("require-react-intl-format-message-params", rule, {
+eslintTester.run("require-react-intl-format-message-param", rule, {
   valid: [
     `formatMessage({ id: 'foo', defaultMessage: 'foo' })`,
   ],
