@@ -19,7 +19,7 @@ eslintTester.run("require-react-intl-format-message-params", rule, {
       ],
     },
     {
-      code: `formatMessage({ defaultMessage: 'bar' })`,
+      code: `formatMessage({ defaultMessage: 'foo' })`,
       errors: [
         {
           message: `Message descriptor passed into formatMessage is missing "id".`,
