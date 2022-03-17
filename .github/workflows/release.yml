@@ -14,15 +14,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 16
-      - name: Test and build
+      - name: Test
         run: |
           yarn
           yarn test
-          yarn build
       - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
         run: |
-          yarn build
           npx semantic-release
