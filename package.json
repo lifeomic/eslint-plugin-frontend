@@ -1,6 +1,6 @@
 {
   "name": "@lifeomic/eslint-plugin-frontend",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "main": "lib/index.js",
   "files": [
     "lib"
@@ -8,6 +8,9 @@
   "repository": "git@github.com:lifeomic/eslint-plugin-frontend.git",
   "author": "Tony Ward <tony.ward@lifeomic.com>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "eslint",
     "rules",
@@ -20,9 +23,11 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "conventional-changelog-conventionalcommits": "^4.6.3",
     "eslint": "^7.7.0",
     "jest": "^26.4.0",
-    "lerna-changelog": "^1.0.1"
+    "lerna-changelog": "^1.0.1",
+    "semantic-release": "^19.0.2"
   },
   "jest": {
     "testMatch": [

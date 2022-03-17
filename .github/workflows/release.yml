@@ -2,12 +2,11 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - master
 
 jobs:
   build:
-    if: ${{ github.head_ref }} == "master"
     runs-on: ubuntu-latest
     environment: npm
     steps:
@@ -15,22 +14,15 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-          registry-url: https://registry.npmjs.org
-      - name: Test
+      - name: Test and build
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
           yarn
           yarn test
-          npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
+          yarn build
+      - name: Publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
+          NPM_TOKEN: ${{secrets.LIFEOMIC_NPM_TOKEN}}
+        run: |
+          yarn build
+          npx semantic-release
